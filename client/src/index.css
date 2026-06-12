@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@keyframes shimmer {
+  0% { background-position: -400% 0; }
+  100% { background-position: 400% 0; }
+}
+
+@theme {
+  --animate-shimmer: shimmer 1.8s ease-in-out infinite;
+}
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  html, body { height: 100%; }
+  #root { min-height: 100%; }
+
+  body {
+    @apply m-0 bg-slate-50 text-slate-900 antialiased;
+    background-image:
+      radial-gradient(circle at top left, rgba(99, 102, 241, 0.12), transparent 32%),
+      radial-gradient(circle at top right, rgba(168, 85, 247, 0.10), transparent 28%),
+      linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+    background-attachment: fixed;
+  }
+
+  body,
+  input,
+  textarea,
+  select,
+  button {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  ::selection {
+    background: rgba(99, 102, 241, 0.18);
+    color: #1e1b4b;
+  }
+}
+
+@layer components {
+  .app-shell {
+    @apply min-h-screen bg-transparent text-slate-900;
+  }
+
+  .page-container {
+    @apply mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8;
+  }
+
+  .page-surface {
+    @apply rounded-3xl border border-white/70 bg-white/80 shadow-[0_10px_40px_rgba(15,23,42,0.08)] backdrop-blur;
+  }
+
+  .panel {
+    @apply rounded-2xl border border-slate-200/80 bg-white shadow-sm;
+  }
+
+  .section-heading {
+    @apply text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl;
+  }
+
+  .section-subtitle {
+    @apply mt-2 text-sm text-slate-500 sm:text-base;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100;
+  }
+
+  .field-label {
+    @apply mb-2 block text-sm font-medium text-slate-700;
+  }
+
+  .primary-button {
+    @apply inline-flex items-center justify-center rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .secondary-button {
+    @apply inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-indigo-200 hover:bg-indigo-50;
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      #e2e8f0 0%,
+      #f1f5f9 40%,
+      #e8edf5 50%,
+      #f1f5f9 60%,
+      #e2e8f0 100%
+    );
+    background-size: 400% 100%;
+    animation: var(--animate-shimmer);
+  }
+}
